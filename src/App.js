@@ -1,12 +1,11 @@
 import './App.css';
-import Homepage from './components/Homepage/Homepage';
+import Login from './components/Login/Login';
 
-const data = "Hello";
 
 function App() {
   return (
     <div className="app">
-      <Homepage sending_data = {data}/>      
+      <Login />
     </div>
   );
 }
