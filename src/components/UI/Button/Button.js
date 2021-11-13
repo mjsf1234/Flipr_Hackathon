@@ -3,9 +3,9 @@ import classes from "./Button.module.css"
 
 function Button(props) {
     return (
-        <div className={`${classes.button} ${props.className}`}>
+        <button className={`${classes.button} ${props.className}`} onClick={props.onSignUp}>
             {props.children}
-        </div>
+        </button>
     )
 }
 
