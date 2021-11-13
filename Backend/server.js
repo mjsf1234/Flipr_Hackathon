@@ -1,12 +1,15 @@
 import express from "express";
 import moongoose from 'mongoose'
 import userDb from "./userDb.js";
-
+import Cors from 'cors';
 //App Config
 const app = express();
 const port = process.env.PORT || 8001
 const connection_url = "mongodb+srv://admin:4YOOe9I81yArvzJG@cluster0.snzz5.mongodb.net/foodDeliveryDB?retryWrites=true&w=majority"
 //MiddleWares
+
+app.use(express.json());
+app.use(Cors());
 
 //DB Config, Password --> 4YOOe9I81yArvzJG
 moongoose.connect(connection_url, {
