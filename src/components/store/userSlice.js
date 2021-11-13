@@ -5,7 +5,9 @@ const userSlice = createSlice({
     initialState: {
         signIn: false,
         location: "",
-        name: ""
+        name: "",
+        items: [], //items = [{restuarant: ,items: []}]
+        totalAmount: 0
     },
     reducers: {
         setSignInInfo(state, action) {

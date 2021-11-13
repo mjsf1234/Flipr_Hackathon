@@ -11,7 +11,6 @@ function Form(props) {
             <Button className={classes.login_button}>Login</Button>
             <Button className={classes.login_button} onSignUp={props.onSignUp}>Sign Up</Button>
         </form>
-
     )
 }
 
