@@ -5,6 +5,7 @@ import { useHistory } from 'react-router';
 import { userActions } from '../store/userSlice';
 import { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
+import { restActions } from '../store/restSlice';
 
 function Form() {
     let history = useHistory();
@@ -22,7 +23,7 @@ function Form() {
 
     const loginHandler = async (event) => {
         event.preventDefault();
-        const req = await axios.get("/addUser");
+        let req = await axios.get("/addUser");
         console.log(req.data);
         const usersData = req.data;
         for (const userNo in usersData) {
@@ -33,7 +34,30 @@ function Form() {
                         location: [latitude, longitude],
                         signIn: true
                     }))
-                    console.log("User Login Done");
+                    history.push({
+                        pathname: "/userHome"
+                    }
+                    );
+                    return;
+                }
+            }
+        }
+
+        req = await axios.get("/addRest");
+        const restsData = req.data;
+        for (const restNo in usersData) {
+            if (restsData[restNo].name === nameInput.current.value) {
+                if (restsData[restNo].password === passInput.current.value) {
+                    dispatch(restActions.setSignInInfo({
+                        name: nameInput.current.value,
+                        location: [latitude, longitude],
+                        signIn: true
+                    }))
+                    history.push({
+                        pathname: "/restHome"
+                    }
+                    );
+                    return;
                 }
             }
         }
