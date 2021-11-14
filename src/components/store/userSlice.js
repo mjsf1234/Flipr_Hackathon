@@ -4,7 +4,7 @@ const userSlice = createSlice({
     name: 'user',
     initialState: {
         signIn: false,
-        location: "",
+        location: [],
         name: "",
         items: [], //items = [{restuarant: ,items: []}]
         totalAmount: 0
@@ -12,7 +12,8 @@ const userSlice = createSlice({
     reducers: {
         setSignInInfo(state, action) {
             const user_info = action.payload;
-            state.signIn = true;
+            console.log("User Info In Redux Local Store is : ", user_info);
+            state.signIn = user_info.signIn;
             state.location = user_info.location;
             state.name = user_info.name
         },
