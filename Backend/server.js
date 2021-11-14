@@ -87,7 +87,89 @@ app.post("/addItem", (req, res) => {
     });
 });
 
-// Fetch Online Orders which are pending
+// Fetch Online Orders which are pending.....
+app.get("/orderStatus", (req, res) => {
+    activeOrdersDb.find((err, data) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(data);
+        }
+    });
+})
+
+app.post("/orderStatus", (req, res) => {
+    const orderData = req.body;
+    // orderData ==> {restName: restName, userName: userName,
+    // items: [itemsOrdered], qty: [qty], amount: [amount], 
+    // totalAmount: [totalamount], status: Pending
+    // }
+    const options = { upsert: true };
+
+    activeOrdersDb.findOneAndUpdate({ name: orderData.restName },
+        {
+            $push: {
+                users: [{
+                    name: orderData.userName,
+                    items: orderData.items,
+                    qty: orderData.qty,
+                    amount: orderData.amount,
+                    totalAmount: orderData.totalAmount,
+                    orderStatus: orderData.status
+                }]
+            }
+        },
+        options,
+        (err) => {
+            if (err) {
+                res.send("Error Occured While Placing the Order");
+            } else {
+                res.send("Order has been placed");
+            }
+        }
+    )
+})
+// This function is Pending Order is not being updated 
+app.post("/changeActiveOrders", (req, res) => {
+    const changeOrderData = req.body; // {name: rstName, user: userName, status: "Rejected"} 
+    if (changeOrderData.status === "Reject") {
+        activeOrdersDb.findOneAndUpdate({
+            name: changeOrderData.rstName,
+            'users.name': changeOrderData.user
+        },
+            {
+                $set: {
+                    'users.orderStatus.$.post': "Rejected"
+                }
+            }, (err) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    res.send("Order Rejected");
+                }
+            }
+        );
+    } else {
+        activeOrdersDb.findOneAndUpdate({ name: changeOrderData.rstName },
+            {
+                $rename: {
+                    users: {
+                        name: changeOrderData.userName,
+                        orderStatus: "Rejected"
+                    }
+                }
+            }, (err) => {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    res.send("Order Placed");
+                }
+            }
+        );
+    }
+
+
+})
 
 // Listener
 
