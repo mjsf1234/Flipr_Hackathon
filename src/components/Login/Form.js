@@ -1,16 +1,17 @@
 import React from 'react'
 import classes from "./Form.module.css"
 import axios from "../../axios";
-import { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import { userActions } from '../store/userSlice';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { useDispatch } from 'react-redux';
 
-function Form(props) {
+function Form() {
+    let history = useHistory();
     const dispatch = useDispatch();
+
     const nameInput = useRef();
     const passInput = useRef();
-
     const [latitude, setLatitude] = useState(0);
     const [longitude, setLongitude] = useState(0);
 
@@ -38,21 +39,27 @@ function Form(props) {
         }
     }
 
-    const signUpHandler = async (event) => {
-        event.preventDefault();
-        const res = await axios.post("/addUser", {
-            name: nameInput.current.value,
-            password: passInput.current.value
-        });
-        console.log("Response after Sign Up: ", res);
+    const userSignUpHandler = () => {
+        return history.push({
+            pathname: "/userSignUp"
+        }
+        );
+    }
+
+    const restSignUpHandler = () => {
+        return history.push({
+            pathname: "/restSignUp"
+        }
+        );
     }
 
     return (
         <form className={classes.form}>
             <input type="text" ref={nameInput} />
             <input type="password" ref={passInput} />
-            <button className={classes.login_button} onClick={loginHandler}>Login</button>
-            <button className={classes.login_button} onClick={signUpHandler}>Sign Up</button>
+            <button className={classes.login_button} onClick={loginHandler}>Login (User/Restaurant)</button>
+            <button className={classes.login_button} onClick={userSignUpHandler}>Sign Up as User</button>
+            <button className={classes.login_button} onClick={restSignUpHandler}>Register Your Restuarant</button>
         </form>
     )
 }
