@@ -3,6 +3,8 @@ import moongoose from 'mongoose'
 import userDb from "./userDb.js";
 import Cors from 'cors';
 import restDb from "./restDb.js";
+import activeOrdersDb from "./activeOrdersDb.js";
+
 //App Config
 const app = express();
 const port = process.env.PORT || 8001
@@ -84,6 +86,8 @@ app.post("/addItem", (req, res) => {
         }
     });
 });
+
+// Fetch Online Orders which are pending
 
 // Listener
 
