@@ -1,0 +1,13 @@
+.explore-section{
+    margin-top: 20px;
+} 
+
+.explore-grid-container {
+    margin-top: 0 auto;
+    max-width: 1300px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap :20px;
+    background-color: #e7e4e4c7;
+   
+  }

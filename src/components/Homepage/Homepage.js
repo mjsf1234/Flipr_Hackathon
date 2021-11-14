@@ -1,12 +1,21 @@
 import React from 'react'
-import './Homepage.css'
+import { restaurant } from '../../data/data'
 
-function Homepage(props) {
+import ExploreSection from '../exploreSection'
+import Footer from '../footer'
+import Header from '../header'
+
+const restaurantList = restaurant; 
+const Homepage = () => {
     return (
-        <div className = "main-container">
-            <h1>{props.sending_data}</h1>
+        <div>
+            <h1> this is the Homepage</h1>
+            <Header/>
+        
+            <ExploreSection list = {restaurantList} />
+               
+            <Footer/>
         </div>
     )
 }
-
 export default Homepage
