@@ -19,8 +19,8 @@ function SignUpUser() {
 
     return (
         <form className={classes.form}>
-            <input type="text" />
-            <input type="password" />
+            <input type="text" ref={nameInput} />
+            <input type="password" ref={passInput} />
             <button className={classes.signup_button} onClick={userSignUpHandler}>Sign Up</button>
         </form>
     )

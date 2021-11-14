@@ -2,6 +2,7 @@ import express from "express";
 import moongoose from 'mongoose'
 import userDb from "./userDb.js";
 import Cors from 'cors';
+import restDb from "./restDb.js";
 //App Config
 const app = express();
 const port = process.env.PORT || 8001
@@ -22,6 +23,8 @@ moongoose.connect(connection_url, {
 app.get("/", (req, res) => {
     res.status(200).send("Hey People")
 })
+
+// Sign up or Login User.
 
 app.post('/addUser', (req, res) => {
     const userData = req.body;
@@ -45,8 +48,43 @@ app.get('/addUser', (req, res) => {
     })
 })
 
+// Sign Up or Login Restuarant.
 
+app.post("/addRest", (req, res) => {
+    const restData = req.body;
+    restDb.create(restData, (err, data) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(201).send(data);
+        }
+    })
+})
 
-//Listener
+app.get("/addRest", (req, res) => {
+    restDb.find((err, data) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(data);
+        }
+    })
+})
+
+// Add Items and Price in Restuarants Database
+
+app.post("/addItem", (req, res) => {
+    const ItemsData = req.body[0];
+    console.log(ItemsData)
+    restDb.findOneAndUpdate({ name: ItemsData.restName }, { $push: { items: ItemsData.addItem } }, (err) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send("Record has been Updated..!!");
+        }
+    });
+});
+
+// Listener
 
 app.listen(port, () => console.log(`Listening on Port: ${port}`));
