@@ -2,11 +2,11 @@ import './App.css';
 import Login from './components/Login/Login';
 import {
   BrowserRouter as Router,
-  Routes,
   Route, Switch
 } from "react-router-dom";
 import SignUpRest from './components/Sign Up/SignUpRest';
 import SignUpUser from './components/Sign Up/SignUpUser';
+import Homepage from './components/Homepage/Homepage';
 
 
 
@@ -24,6 +24,10 @@ function App() {
 
           <Route path="/userSignUp">
             <SignUpUser />
+          </Route>
+
+          <Route path="/home">
+            <Homepage />
           </Route>
 
           <Route path="/">

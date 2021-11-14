@@ -35,7 +35,7 @@ function Form() {
                         signIn: true
                     }))
                     history.push({
-                        pathname: "/userHome"
+                        pathname: "/home"
                     }
                     );
                     return;
@@ -54,7 +54,7 @@ function Form() {
                         signIn: true
                     }))
                     history.push({
-                        pathname: "/restHome"
+                        pathname: "/home"
                     }
                     );
                     return;

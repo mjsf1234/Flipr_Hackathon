@@ -74,9 +74,9 @@ app.get("/addRest", (req, res) => {
 // Add Items and Price in Restuarants Database
 
 app.post("/addItem", (req, res) => {
-    const ItemsData = req.body[0];
+    const ItemsData = req.body;
     console.log(ItemsData)
-    restDb.findOneAndUpdate({ name: ItemsData.restName }, { $push: { items: ItemsData.addItem } }, (err) => {
+    restDb.findOneAndUpdate({ name: ItemsData.restName }, { $push: { items: [ItemsData.addItem] } }, (err) => {
         if (err) {
             res.send(err);
         } else {
