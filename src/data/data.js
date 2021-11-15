@@ -1,34 +1,46 @@
-export const restaurant =[{
+export const restaurant =[
+  
+  {
     
     "name": "sabar",
     
-    "location": "afs"
+    "location": "afs",
+    "item" :[ ['burger','25'], ['Colddrink','40'],  ['pizza','500'] ]
+
   },{
     "name": "dawat",
     
-    "location": "infocity"
+    "location": "infocity",
+    item :[ {burger:25}, {Colddrink:40},  {pizza:500}, ]
   },{
     "name": "kudasan",
     
-    "location": "infocity"
+    "location": "infocity",
+    item :[ {burger:25}, {Colddrink:40},  {pizza:500}, ]
   },{
     "name": "teapost",
     
-    "location": "infocity"
+    "location": "infocity",
+    item :[ {burger:25}, {Colddrink:40},  {pizza:500}, ]
   },{
     "name": "sainath",
     
-    "location": "infocity"
+    "location": "infocity",
+    item :[ {burger:25}, {Colddrink:40},  {pizza:500}, ]
   },{
     "name": "lapinoz",
     
-    "location": "infocity"
+    "location": "infocity",
+    item :[ {burger:25}, {Colddrink:40},  {pizza:500}, ]
   },{
     "name": "mcd",
     
-    "location": "infocity"
+    "location": "infocity",
+    item :[ {burger:25}, {Colddrink:40},  {pizza:500}, ]
   },{
     "name": "dominos",
     
-    "location": "infocity"
+    "location": "infocity",
+    item :[ {burger:25}, {Colddrink:40},  {pizza:500}, ]
   }]
+

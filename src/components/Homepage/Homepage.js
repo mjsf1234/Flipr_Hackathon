@@ -1,19 +1,19 @@
 import React from 'react'
 import { restaurant } from '../../data/data'
 
+
 import ExploreSection from '../exploreSection'
 import Footer from '../footer'
 import Header from '../header'
 
 const restaurantList = restaurant; 
+console.log( "im at the homepage page:  ", restaurantList)
 const Homepage = () => {
     return (
         <div>
-            <h1> this is the Homepage</h1>
             <Header/>
-        
-            <ExploreSection list = {restaurantList} />
-               
+            
+            <ExploreSection list = {restaurantList} showRst = {true} showItems ={false}/>
             <Footer/>
         </div>
     )
