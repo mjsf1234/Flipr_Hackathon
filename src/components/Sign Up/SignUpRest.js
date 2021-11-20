@@ -29,8 +29,8 @@ function SignUpRest() {
 
     return (
         <form className={classes.form}>
-            <input type="text" ref={nameInput} />
-            <input type="password" ref={passInput} />
+            <input type="text" ref={nameInput} placeholder="Restuarant Name" />
+            <input type="password" ref={passInput} placeholder="Restuarant Password" />
             <button className={classes.signup_button} onClick={restSignUpHandler}>Sign Up</button>
         </form>
     )
