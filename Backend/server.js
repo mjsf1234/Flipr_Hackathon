@@ -127,15 +127,14 @@ app.post("/orderStatus", (req, res) => {
 
 // This function is Pending Order is not being updated 
 app.post("/changeActiveOrders", (req, res) => {
-    const changeOrderData = req.body; // {name: rstName, user: userName, status: "Rejected"} 
+    const changeOrderData = req.body; // {rstName: rstName, userName: userName, orderStatus: "Rejected"} 
     if (changeOrderData.status === "Reject") {
         activeOrdersDb.findOneAndUpdate({
-            name: changeOrderData.rstName,
-            'users.name': changeOrderData.user
+            name: changeOrderData.rstName
         },
             {
                 $set: {
-                    'users.orderStatus.$.post': "Rejected"
+                    'users.userName.orderStatus': "Rejected"
                 }
             }, (err) => {
                 if (err) {
@@ -146,19 +145,18 @@ app.post("/changeActiveOrders", (req, res) => {
             }
         );
     } else {
-        activeOrdersDb.findOneAndUpdate({ name: changeOrderData.rstName },
+        activeOrdersDb.findOneAndUpdate({
+            name: changeOrderData.rstName
+        },
             {
-                $rename: {
-                    users: {
-                        name: changeOrderData.userName,
-                        orderStatus: "Rejected"
-                    }
+                $set: {
+                    'users.userName.orderStatus.$.set': "Accepted"
                 }
             }, (err) => {
                 if (err) {
                     res.status(500).send(err);
                 } else {
-                    res.send("Order Placed");
+                    res.send("Order Accepted");
                 }
             }
         );
