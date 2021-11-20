@@ -22,14 +22,12 @@ moongoose.connect(connection_url, {
 
 
 //API EndPoints
-app.get("/", (req, res) => {
-    res.status(200).send("Hey People")
-})
+
 
 // Sign up or Login User.
 
 app.post('/addUser', (req, res) => {
-    const userData = req.body;
+    const userData = req.body; // {name: "", password: ""}
 
     userDb.create(userData, (err, data) => {
         if (err) {
@@ -54,6 +52,7 @@ app.get('/addUser', (req, res) => {
 
 app.post("/addRest", (req, res) => {
     const restData = req.body;
+    // {name: "", password: "", location: [], items: []}
     restDb.create(restData, (err, data) => {
         if (err) {
             res.status(500).send(err);
@@ -61,6 +60,8 @@ app.post("/addRest", (req, res) => {
             res.status(201).send(data);
         }
     })
+    const initialRest = restData.name;
+    activeOrdersDb.create({ rstName: initialRest })
 })
 
 app.get("/addRest", (req, res) => {
@@ -76,7 +77,7 @@ app.get("/addRest", (req, res) => {
 // Add Items and Price in Restuarants Database
 
 app.post("/addItem", (req, res) => {
-    const ItemsData = req.body;
+    const ItemsData = req.body; // {restName: "", addItem: ["Pizza", "123"]};
     console.log(ItemsData)
     restDb.findOneAndUpdate({ name: ItemsData.restName }, { $push: { items: [ItemsData.addItem] } }, (err) => {
         if (err) {
@@ -100,46 +101,42 @@ app.get("/orderStatus", (req, res) => {
 
 app.post("/orderStatus", (req, res) => {
     const orderData = req.body;
-    // orderData ==> {restName: restName, userName: userName,
-    // items: [itemsOrdered], qty: [qty], amount: [amount], 
-    // totalAmount: [totalamount], status: Pending
-    // }
-    const options = { upsert: true };
-
-    activeOrdersDb.findOneAndUpdate({ name: orderData.restName },
+    // orderData ==> {userName: "", rstName: "", 
+    // items: {names: [], qty: [], amount: []}, 
+    // totalAmount: "", orderStatus: "" }
+    activeOrdersDb.findOneAndUpdate({ rstName: orderData.rstName },
         {
             $push: {
                 users: [{
                     name: orderData.userName,
                     items: orderData.items,
-                    qty: orderData.qty,
-                    amount: orderData.amount,
                     totalAmount: orderData.totalAmount,
-                    orderStatus: orderData.status
+                    orderStatus: orderData.orderStatus
                 }]
             }
         },
-        options,
         (err) => {
             if (err) {
-                res.send("Error Occured While Placing the Order");
+                res.send(err);
             } else {
                 res.send("Order has been placed");
             }
         }
     )
 })
+
 // This function is Pending Order is not being updated 
 app.post("/changeActiveOrders", (req, res) => {
-    const changeOrderData = req.body; // {name: rstName, user: userName, status: "Rejected"} 
-    if (changeOrderData.status === "Reject") {
+    const changeOrderData = req.body; // {rstName: rstName, userName: userName, orderStatus: "Rejected"} 
+
+    if (changeOrderData.orderStatus === "Reject") {
         activeOrdersDb.findOneAndUpdate({
-            name: changeOrderData.rstName,
-            'users.name': changeOrderData.user
+            rstName: changeOrderData.rstName,
+            "users.name": changeOrderData.userName
         },
             {
-                $set: {
-                    'users.orderStatus.$.post': "Rejected"
+                "$set": {
+                    "users.$.orderStatus": "Rejected"
                 }
             }, (err) => {
                 if (err) {
@@ -150,19 +147,19 @@ app.post("/changeActiveOrders", (req, res) => {
             }
         );
     } else {
-        activeOrdersDb.findOneAndUpdate({ name: changeOrderData.rstName },
+        activeOrdersDb.findOneAndUpdate({
+            rstName: changeOrderData.rstName,
+            "users.name": changeOrderData.userName
+        },
             {
-                $rename: {
-                    users: {
-                        name: changeOrderData.userName,
-                        orderStatus: "Rejected"
-                    }
+                "$set": {
+                    "users.$.orderStatus": "Accepted"
                 }
             }, (err) => {
                 if (err) {
                     res.status(500).send(err);
                 } else {
-                    res.send("Order Placed");
+                    res.send("Order Accepted");
                 }
             }
         );

@@ -79,8 +79,8 @@ function Form() {
 
     return (
         <form className={classes.form}>
-            <input type="text" ref={nameInput} />
-            <input type="password" ref={passInput} />
+            <input type="text" ref={nameInput} placeholder="Username" />
+            <input type="password" ref={passInput} placeholder="Password" />
             <button className={classes.login_button} onClick={loginHandler}>Login (User/Restaurant)</button>
             <button className={classes.login_button} onClick={userSignUpHandler}>Sign Up as User</button>
             <button className={classes.login_button} onClick={restSignUpHandler}>Register Your Restuarant</button>

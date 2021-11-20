@@ -11,7 +11,7 @@ const userSlice = createSlice({
     },
     reducers: {
         setSignInInfo(state, action) {
-            const user_info = action.payload;
+            const user_info = action.payload; // {signIn: true, location: [23,25]}
             console.log("User Info In Redux Local Store is : ", user_info);
             state.signIn = user_info.signIn;
             state.location = user_info.location;

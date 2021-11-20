@@ -1,4 +1,5 @@
 .card {
-  background: #411687;
-  border-radius: 18px;
+  background: linear-gradient(180deg, #9b66d0 0%, #591b96 100%);
+  box-shadow: 0px 4px 4px #56208b;
+  border-radius: 30px;
 }
