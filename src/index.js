@@ -1,17 +1,20 @@
 
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { Provider} from 'react-redux';
+import Store from './components/Store/index'
+
 
 
 
 
 ReactDOM.render(
 
-  <React.Fragment>
+  <Provider store = {Store}>
     <App />
-    </React.Fragment>,
+    </Provider>,
   document.getElementById('root')
 );
 

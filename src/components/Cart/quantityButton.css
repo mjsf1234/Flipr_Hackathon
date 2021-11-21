@@ -1,0 +1,6 @@
+.quantity-button {
+  width: 120px;
+  min-width: 120px;
+  border: 1px solid #2222;
+  border-radius: 40px;
+}

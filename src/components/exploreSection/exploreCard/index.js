@@ -1,20 +1,31 @@
+import { useDispatch } from 'react-redux';
+import { cartAction } from '../../Store/cartSlice';
 import { useHistory } from 'react-router'
-import React from 'react'
-import './exploreCard.css'
+import React from 'react';
+import './exploreCard.css';
+import { restaurant } from '../../../data/data';
+
+
+
+
 const ExploreCard = (props) => {
-    
+    console.log( ' this is the data pass to explore card' ,props)
+
+    const  dispatch = useDispatch();
     const history = useHistory();
 
     function routeRst(){
-        console.log('Route')
+        console.log('Apply Online button is clicked' , props)
         history.push({
-            pathname: "/rstHomepage"
+            pathname: `/rstHomepage?${props.rstData.name}`
         }
         );
         return;
     }
-
-    console.log("Data from ExploreCard", props.showItems, props.showRst  )
+    const printPage = ()=>{
+        console.log('propsData of Rest whose Button is clicked',props)
+    }
+    
     return (
             <div>           
             {props.showRst && <div className = "card">
@@ -28,19 +39,23 @@ const ExploreCard = (props) => {
                 <div className = "apply">
                     <button onClick = {routeRst}> Apply online</button>
                 </div>
-           </div>}
+                <button onClick = {printPage}> props deatils </button>
+            </div>}
 
-           {props.showItems && <div className = "card">
-               
-               
+            {/* Display the items */}
+           {props.showItems && <div className = "card"> 
+           
                 <div className='restaurant-info'>
-                     {console.log(props.rstData )}
                     <p> {props.rstData[0]} </p>
-                    <p> {props.rstData[1]} </p>                     
+                    <p> {props.rstData[1]} </p>
+                    <p> {props.restaurantName}</p>
+                                        
                 </div>
-                <div className = "apply">
-                    <button > + </button>
-                    <button > - </button>
+                <div className = "add-to-cart">
+                   <button onClick = { () => {
+                       dispatch(cartAction.addToCart( {rstName:props.restaurantName, rstItem:props.rstData[0], price:props.rstData[1]  }));
+                       
+                   }}>  Add to cart</button>
                 </div>
            </div>}
            </div>
