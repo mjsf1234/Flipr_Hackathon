@@ -1,0 +1,38 @@
+.login_button {
+  width: 10rem;
+  margin: 0.5rem;
+  margin: 0.5rem auto;
+  cursor: pointer;
+}
+
+.button {
+  background: #3779c7;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 7px;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form input {
+  border: none;
+  border-radius: 10px;
+  padding: 0.4rem;
+  margin: 0.2rem;
+}
+
+button {
+  padding: 0.4rem 0.4rem;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  background: linear-gradient(180deg, #bd83f6 0%, #9050cf 100%);
+  box-shadow: 0px 2px 9px #56208b;
+  border-radius: 30px;
+}

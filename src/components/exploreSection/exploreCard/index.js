@@ -9,22 +9,22 @@ import { restaurant } from '../../../data/data';
 
 
 const ExploreCard = (props) => {
-    console.log( ' this is the data pass to explore card' ,props)
+    // console.log( ' this is the data pass to explore card' ,props)
 
     const  dispatch = useDispatch();
     const history = useHistory();
 
     function routeRst(){
-        console.log('Apply Online button is clicked' , props)
+        // console.log('Apply Online button is clicked' , props)
         history.push({
             pathname: `/rstHomepage?${props.rstData.name}`
         }
         );
         return;
     }
-    const printPage = ()=>{
-        console.log('propsData of Rest whose Button is clicked',props)
-    }
+    // const printPage = ()=>{                                            // use to display propsData of Rest whose Button is clicked
+    //     console.log('propsData of Rest whose Button is clicked',props)
+    // }
     
     return (
             <div>           
@@ -39,7 +39,7 @@ const ExploreCard = (props) => {
                 <div className = "apply">
                     <button onClick = {routeRst}> Apply online</button>
                 </div>
-                <button onClick = {printPage}> props deatils </button>
+                {/* <button onClick = {printPage}> props deatils </button> // ---> use to display the value store in each card */}
             </div>}
 
             {/* Display the items */}
