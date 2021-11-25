@@ -20,15 +20,10 @@ moongoose.connect(connection_url, {
     useUnifiedTopology: true
 })
 
-
-//API EndPoints
-
-
 // Sign up or Login User.
 
 app.post('/addUser', (req, res) => {
     const userData = req.body; // {name: "", password: ""}
-
     userDb.create(userData, (err, data) => {
         if (err) {
             res.status(500).send(err)
