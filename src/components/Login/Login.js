@@ -1,12 +1,4 @@
 import React from 'react'
-<<<<<<< HEAD
-
-const Login = () => {
-    return (
-        <div>
-            <h1> THis is Login Page</h1>
-        </div>
-=======
 import GoogleLogin from 'react-google-login'
 import classes from "./Login.module.css"
 import Card from "../UI/Card/Card"
@@ -30,7 +22,6 @@ function Login() {
                 />
             </div>
         </Card>
->>>>>>> 87b81a4b06e2bf1ddab1483a145a97c921b14b66
     )
 }
 

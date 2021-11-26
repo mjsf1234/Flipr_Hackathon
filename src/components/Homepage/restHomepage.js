@@ -10,7 +10,7 @@ function RestHomepage() {
     const itemName = useRef();
     const itemPrice = useRef();
 
-    const restName = useSelector(state => state.rest.name);
+    const restName = localStorage.getItem("RstName");
 
     const addItemHandler = async (event) => {
         event.preventDefault();
