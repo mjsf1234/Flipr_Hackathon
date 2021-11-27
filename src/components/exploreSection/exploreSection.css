@@ -1,13 +1,27 @@
-.explore-section{
-    margin-top: 20px;
-} 
+.explore-section {
+  padding: 2%;
+}
 
 .explore-grid-container {
-    margin-top: 0 auto;
-    max-width: 1300px;
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap :20px;
-    background-color: #e7e4e4c7;
-   
-  }
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.cart-box {
+  position: relative;
+  z-index: 10;
+  background-color: black;
+}
+
+.cart-button {
+  margin: 2rem auto;
+  width: 100%;
+  text-align: center;
+}
+
+.cart-button button {
+  padding: 0.8rem;
+  max-width: 20%;
+  min-width: 5rem;
+}

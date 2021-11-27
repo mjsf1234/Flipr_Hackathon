@@ -24,16 +24,21 @@ function Form() {
     const loginHandler = async (event) => {
         event.preventDefault();
         let req = await axios.get("/addUser");
-        console.log(req.data);
         const usersData = req.data;
         for (const userNo in usersData) {
             if (usersData[userNo].name === nameInput.current.value) {
                 if (usersData[userNo].password === passInput.current.value) {
-                    dispatch(userActions.setSignInInfo({
-                        name: nameInput.current.value,
-                        location: [latitude, longitude],
-                        signIn: true
-                    }))
+
+                    // dispatch(userActions.setSignInInfo({
+                    //     name: nameInput.current.value,
+                    //     location: [latitude, longitude],
+                    //     signIn: true
+                    // }))
+
+                    localStorage.setItem('signInUser', 1);
+                    localStorage.setItem('username', nameInput.current.value);
+                    localStorage.setItem('location', [latitude, longitude]);
+
                     history.push({
                         pathname: "/home"
                     }
@@ -45,14 +50,20 @@ function Form() {
 
         req = await axios.get("/addRest");
         const restsData = req.data;
-        for (const restNo in usersData) {
+        for (const restNo in restsData) {
             if (restsData[restNo].name === nameInput.current.value) {
                 if (restsData[restNo].password === passInput.current.value) {
-                    dispatch(restActions.setSignInInfo({
-                        name: nameInput.current.value,
-                        location: [latitude, longitude],
-                        signIn: true
-                    }))
+
+                    // dispatch(restActions.setSignInInfo({
+                    //     name: nameInput.current.value,
+                    //     location: [latitude, longitude],
+                    //     signIn: true
+                    // }))
+
+                    localStorage.setItem('signInRst', 1);
+                    localStorage.setItem('RstName', nameInput.current.value);
+                    localStorage.setItem('location', [latitude, longitude]);
+
                     history.push({
                         pathname: "/home"
                     }

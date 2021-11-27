@@ -73,7 +73,7 @@ app.get("/addRest", (req, res) => {
 
 app.post("/addItem", (req, res) => {
     const ItemsData = req.body; // {restName: "", addItem: ["Pizza", "123"]};
-    console.log(ItemsData)
+    console.log(ItemsData);
     restDb.findOneAndUpdate({ name: ItemsData.restName }, { $push: { items: [ItemsData.addItem] } }, (err) => {
         if (err) {
             res.send(err);
@@ -97,13 +97,14 @@ app.get("/orderStatus", (req, res) => {
 app.post("/orderStatus", (req, res) => {
     const orderData = req.body;
     // orderData ==> {userName: "", rstName: "", 
-    // items: {names: [], qty: [], amount: []}, 
-    // totalAmount: "", orderStatus: "" }
+    // items: [{itemName: "", quantity: "", price: ""}], 
+    // totalAmount: "", 
+    // orderStatus: "" }
     activeOrdersDb.findOneAndUpdate({ rstName: orderData.rstName },
         {
             $push: {
                 users: [{
-                    name: orderData.userName,
+                    username: orderData.userName,
                     items: orderData.items,
                     totalAmount: orderData.totalAmount,
                     orderStatus: orderData.orderStatus

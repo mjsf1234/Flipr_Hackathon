@@ -1,6 +1,9 @@
 .app {
-  background: linear-gradient(180deg, #ffffff 0%, #4e1686 100%);
+  background-image: url("./assets/images/Login.png");
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  position: absolute;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
 }

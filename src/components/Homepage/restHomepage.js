@@ -10,7 +10,7 @@ function RestHomepage() {
     const itemName = useRef();
     const itemPrice = useRef();
 
-    const restName = useSelector(state => state.rest.name);
+    const restName = localStorage.getItem("RstName");
 
     const addItemHandler = async (event) => {
         event.preventDefault();
@@ -40,9 +40,9 @@ function RestHomepage() {
                 </form>
             </Card>
 
-            <Card className={classes.activeOrders}>
+            {/* <Card className={classes.activeOrders}>
 
-            </Card>
+            </Card> */}
         </div>
     )
 }
