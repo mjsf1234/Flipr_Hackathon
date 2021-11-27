@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Card from '../UI/Card/Card';
 import classes from "./restHomepage.module.css";
 import axios from "../../axios"
-import { useSelector } from 'react-redux';
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 function RestHomepage() {
 
@@ -11,6 +10,19 @@ function RestHomepage() {
     const itemPrice = useRef();
 
     const restName = localStorage.getItem("RstName");
+
+    const [res, setRes] = useState([]);
+    useEffect(() => {
+        async function getRestList() {
+            const res = await axios.get('/addRest');
+            setRes(res);
+            // console.log(res.data);
+        }
+        getRestList();
+    }, [])
+
+    const items = res.length !== 0 ? res.data.find(rst => rst.name == restName) : [];
+    console.log("Item Found is ", items);
 
     const addItemHandler = async (event) => {
         event.preventDefault();
@@ -26,8 +38,12 @@ function RestHomepage() {
         console.log("Response after Item Add: ", res);
     }
 
+    // const removeItemHandler = (event) => {
+    //     console.log("Clicked on : ", event.target)
+    // }
+
     return (
-        <div>
+        <div className={classes.rstHome}>
             <Card className={classes.restHomepage}>
 
                 <form className={classes.restForm}>
@@ -40,9 +56,20 @@ function RestHomepage() {
                 </form>
             </Card>
 
-            {/* <Card className={classes.activeOrders}>
-
-            </Card> */}
+            <Card className={classes.activeOrders}>
+                {items.length !== 0 ? items.items.map((item) => (
+                    <ul>
+                        <li className={classes.itemFocus} onClick={
+                            () => {
+                                console.log(item[0]);
+                            }
+                        }>
+                            {item[0]}
+                        </li>
+                        <hr />
+                    </ul>
+                )) : null}
+            </Card>
         </div>
     )
 }

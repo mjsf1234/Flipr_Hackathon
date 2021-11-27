@@ -69,7 +69,7 @@ app.get("/addRest", (req, res) => {
     })
 })
 
-// Add Items and Price in Restuarants Database
+// Add Items and Price in Restuarants Database.....
 
 app.post("/addItem", (req, res) => {
     const ItemsData = req.body; // {restName: "", addItem: ["Pizza", "123"]};
@@ -82,6 +82,10 @@ app.post("/addItem", (req, res) => {
         }
     });
 });
+
+// Remove Items and Price in Restuarants Database.....
+
+
 
 // Fetch Online Orders which are pending.....
 app.get("/orderStatus", (req, res) => {

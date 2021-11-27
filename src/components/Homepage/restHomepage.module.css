@@ -1,8 +1,8 @@
 .restHomepage {
   height: fit-content;
   color: white;
-  width: 20rem;
-  margin: 20rem 10%;
+  /* width: 20rem; */
+  margin: 20rem 1rem 20rem 10%;
   text-align: center;
   padding: 2rem;
 }
@@ -28,4 +28,25 @@ button {
 }
 .restForm input:focus {
   outline: none;
+}
+
+.activeOrders {
+  color: white;
+  width: fit-content;
+  padding: 1rem;
+}
+
+.rstHome {
+  display: flex;
+  align-items: center;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.itemFocus:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
 }
