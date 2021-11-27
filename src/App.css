@@ -1,0 +1,9 @@
+.app {
+  background-image: url("./assets/images/Login.png");
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+}

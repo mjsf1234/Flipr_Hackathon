@@ -10,8 +10,8 @@ function Login() {
         console.log(response.profileObj);
     }
     return (
-        <Card className={classes.login_card}>
-            <div className={classes.login_content}>
+        <div className={classes.login_background}>
+            <Card className={classes.login_card}>
                 <Form />
                 <GoogleLogin
                     clientId="273708457264-7hld2e0ljomfgspe3l998fvhmanpmj8h.apps.googleusercontent.com"
@@ -20,8 +20,8 @@ function Login() {
                     onFailure={responseGoogle}
                     cookiePolicy={'single_host_origin'}
                 />
-            </div>
-        </Card>
+            </Card>
+        </div>
     )
 }
 

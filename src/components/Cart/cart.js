@@ -3,6 +3,7 @@ import CartItemsCard from './cartItemsCard'
 import { useSelector } from 'react-redux'
 import { getCartItem, totalPrice } from '../store/cartSlice'
 import axios from "../../axios"
+import "./cart.css"
 
 const Cart = (props) => {   //  state.items = cartItem
     const cartItem = useSelector(getCartItem)

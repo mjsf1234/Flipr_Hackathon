@@ -3,7 +3,7 @@ import classes from "./SignUpRest.module.css"
 import { Navigate, Route } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import axios from "../../axios"
-
+import Card from '../UI/Card/Card';
 function SignUpRest() {
     const nameInput = useRef();
     const passInput = useRef();
@@ -28,11 +28,13 @@ function SignUpRest() {
     }
 
     return (
-        <form className={classes.form}>
-            <input type="text" ref={nameInput} placeholder="Restuarant Name" />
-            <input type="password" ref={passInput} placeholder="Restuarant Password" />
-            <button className={classes.signup_button} onClick={restSignUpHandler}>Sign Up</button>
-        </form>
+        <Card className={classes.form_card}>
+            <form className={classes.form}>
+                <input type="text" ref={nameInput} placeholder="Restuarant Name" />
+                <input type="password" ref={passInput} placeholder="Restuarant Password" />
+                <button className={classes.signup_button} onClick={restSignUpHandler}>Sign Up</button>
+            </form>
+        </Card>
     )
 }
 

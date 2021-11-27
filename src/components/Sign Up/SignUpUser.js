@@ -2,6 +2,7 @@ import React from 'react'
 import classes from "./SignUpUser.module.css"
 import axios from "../../axios";
 import { useRef } from 'react';
+import Card from '../UI/Card/Card';
 
 function SignUpUser() {
 
@@ -18,11 +19,13 @@ function SignUpUser() {
     }
 
     return (
-        <form className={classes.form}>
-            <input type="text" ref={nameInput} placeholder="UserName" />
-            <input type="password" ref={passInput} placeholder="Password" />
-            <button className={classes.signup_button} onClick={userSignUpHandler}>Sign Up</button>
-        </form>
+        <Card className={classes.form_card}>
+            <form className={classes.form}>
+                <input type="text" ref={nameInput} placeholder="UserName" />
+                <input type="password" ref={passInput} placeholder="Password" />
+                <button className={classes.signup_button} onClick={userSignUpHandler}>Sign Up</button>
+            </form>
+        </Card>
     )
 }
 

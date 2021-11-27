@@ -40,9 +40,9 @@ function RestHomepage() {
                 </form>
             </Card>
 
-            <Card className={classes.activeOrders}>
+            {/* <Card className={classes.activeOrders}>
 
-            </Card>
+            </Card> */}
         </div>
     )
 }

@@ -20,13 +20,13 @@ function UserHomepage() {
 
     return (
         <div>
-            <Nav />
-            <Header />
+            {/* <Nav /> */}
+            {/* <Header /> */}
             {/* {console.log("Rest data is : ", res)} */}
             {res.length !== 0 && <ExploreSection list={res} showRst={true} showItems={false} restaurantName={''} />}
 
             {/* list = [   {name:'',  location: '' , items: [] }   {R2}   {R3}  ] */}
-            <Footer />
+            {/* <Footer /> */}
         </div>
     )
 }

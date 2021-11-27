@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { cartAction } from '../../store/cartSlice';
 import { useHistory } from 'react-router'
-import React from 'react';
+import React, { Fragment } from 'react';
 import './exploreCard.css';
 
 
@@ -26,7 +26,7 @@ const ExploreCard = (props) => {
     // }
 
     return (
-        <div>
+        <Fragment>
             {props.showRst && <div className="card">
                 <img src='https://ooredoo.rltdplatform.com/AlbumResources//1/Images/Xlarge/Spicy%20Chicken-400x300px-1_2020-08-20-12-08-50.jpg' alt='restaurant_image' className=' card-image' />
 
@@ -47,7 +47,7 @@ const ExploreCard = (props) => {
                 <div className='restaurant-info'>
                     <p> {props.rstData[0]} </p>
                     <p> {props.rstData[1]} </p>
-                    <p> {props.restaurantName}</p>
+                    {/* <p> {props.restaurantName}</p> */}
 
                 </div>
                 <div className="add-to-cart">
@@ -62,7 +62,7 @@ const ExploreCard = (props) => {
                     }}>Add to cart</button>
                 </div>
             </div>}
-        </div>
+        </Fragment>
     )
 }
 
