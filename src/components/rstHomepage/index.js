@@ -27,13 +27,12 @@ const RstHomepage = () => {
 
     return (
         <div className='rstmenu'>
-            <div>
+            {/* <div>
                 <p> this is {restaurantName}</p>
-            </div>
+            </div> */}
             {findRst && <ExploreSection list={findRst.items} showRst={false} showItems={true} restaurantName={restaurantName} />}
         </div>
     )
-
 }
 
 export default RstHomepage

@@ -1,4 +1,6 @@
 .cart-items-container {
-  background-color: rgba(202, 212, 216, 0.692);
-  margin: 10px;
+  background-color: rgba(190, 41, 41, 0.692);
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 1rem;
 }

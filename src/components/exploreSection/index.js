@@ -36,8 +36,8 @@ const ExploreSection = (props) => {
             <div className="cart-button">
                 {props.showItems && <button onClick={cartHandler}>Cart</button>}
             </div>
-            {cartShow && <div>
-                <Cart restaurantName={props.restaurantName} className="cart-box" />
+            {cartShow && <div className="cart-box" >
+                <Cart restaurantName={props.restaurantName} />
             </div>}
         </Fragment>
     )

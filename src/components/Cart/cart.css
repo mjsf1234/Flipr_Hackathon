@@ -5,5 +5,19 @@
   /* align-items: center; */
   text-align: center;
   gap: 2rem;
+  width: 50%;
+  margin: auto;
   color: white;
+}
+
+.cart-container button {
+  width: 20%;
+  margin: auto;
+}
+
+@media (max-width: 1900px) {
+  .cart-container {
+    width: 95%;
+    margin: auto;
+  }
 }

@@ -6,17 +6,22 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .cart-box {
-  position: relative;
   z-index: 10;
+  width: 50%;
+  height: 50%;
+  margin: 2rem auto;
   background-color: black;
+  border-radius: 1rem;
+  padding: 1rem;
 }
 
 .cart-button {
-  margin: 2rem auto;
-  width: 100%;
+  margin: auto;
   text-align: center;
 }
 
@@ -24,4 +29,10 @@
   padding: 0.8rem;
   max-width: 20%;
   min-width: 5rem;
+}
+
+@media (max-width: 1900px) {
+  .cart-box {
+    width: 100%;
+  }
 }
