@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment, useState } from 'react'
 import Cart from '../Cart/cart'
 import ExploreCard from './exploreCard'
 import './exploreSection.css'
@@ -8,11 +8,13 @@ import './exploreSection.css'
 const ExploreSection = (props) => {
     // props = {list:[ {R1} {R2}  {R3}] ,  showItem :false, showRst:true  } When home page call explore section
     //props = {list:[ [R1.Items]  [R2.items] [R3.items] ] ,  showItem :true, showRst:false  }  When Rsthomepage call explore section
-
+    const [cartShow, setCartShow] = useState(false);
+    const cartHandler = () => {
+        setCartShow(!cartShow);
+    }
     return (
-
-        <div className="explore-section max-width">
-            <div className="explore-grid-container ">
+        <Fragment>
+            <div className="explore-grid-container explore-section max-width">
                 {/* {console.log(' this is the props from homepage', props.list)} */}
                 {props.showRst && props.list.data.map((data) => {
                     // list = [ {R1}   {R2}  {R3} ]  , data = loop over R1, R2,R3 
@@ -28,9 +30,16 @@ const ExploreSection = (props) => {
                     //rstdata = [  [burget,20]   [pizaa,40]    []  ] 
 
                 })}
-                {props.showItems && <Cart restaurantName={props.restaurantName} />}
+
+                {/* <Cart restaurantName={props.restaurantName} /> */}
             </div>
-        </div>
+            <div className="cart-button">
+                {props.showItems && <button onClick={cartHandler}>Cart</button>}
+            </div>
+            {cartShow && <div>
+                <Cart restaurantName={props.restaurantName} className="cart-box" />
+            </div>}
+        </Fragment>
     )
 }
 

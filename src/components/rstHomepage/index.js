@@ -26,17 +26,11 @@ const RstHomepage = () => {
     console.log("Rest Items shown from here are ", findRst);
 
     return (
-        <div>
+        <div className='rstmenu'>
             <div>
-                <Nav />
+                <p> this is {restaurantName}</p>
             </div>
-
-            <div className='rstmenu'>
-                <div>
-                    <p> this is {restaurantName}</p>
-                </div>
-                {findRst && <ExploreSection list={findRst.items} showRst={false} showItems={true} restaurantName={restaurantName} />}
-            </div>
+            {findRst && <ExploreSection list={findRst.items} showRst={false} showItems={true} restaurantName={restaurantName} />}
         </div>
     )
 
