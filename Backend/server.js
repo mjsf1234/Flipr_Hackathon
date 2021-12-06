@@ -74,7 +74,7 @@ app.get("/addRest", (req, res) => {
 app.post("/addItem", (req, res) => {
     const ItemsData = req.body; // {restName: "", addItem: ["Pizza", "123"]};
     console.log(ItemsData);
-    restDb.findOneAndUpdate({ name: ItemsData.restName }, { $push: { items: [ItemsData.addItem] } }, (err) => {
+    restDb.findOneAndUpdate({ name: ItemsData.restName }, { $push: { items: { itemName: ItemsData.addItem[0], itemPrice: ItemsData.addItem[1] } } }, (err) => {
         if (err) {
             res.send(err);
         } else {
@@ -84,7 +84,16 @@ app.post("/addItem", (req, res) => {
 });
 
 // Remove Items and Price in Restuarants Database.....
-
+app.post("/removeItem", (req, res) => {
+    const ItemsData = req.body; // {restName: "", item: ["", ""]};
+    restDb.findOneAndUpdate({ name: ItemsData.restName, "items.itemName": ItemsData.item }, { $pull: { items: { itemName: ItemsData.item[0], itemPrice: ItemsData.item[1] } } }, (err) => {
+        if (err) {
+            res.send(err);
+        } else {
+            res.send("Record has been Updated..!!");
+        }
+    });
+});
 
 
 // Fetch Online Orders which are pending.....
@@ -98,7 +107,7 @@ app.get("/orderStatus", (req, res) => {
     });
 })
 
-app.post("/orderStatus", (req, res) => {
+app.post("/placeOrder", (req, res) => {
     const orderData = req.body;
     // orderData ==> {userName: "", rstName: "", 
     // items: [{itemName: "", quantity: "", price: ""}], 
@@ -132,7 +141,7 @@ app.post("/changeActiveOrders", (req, res) => {
     if (changeOrderData.orderStatus === "Reject") {
         activeOrdersDb.findOneAndUpdate({
             rstName: changeOrderData.rstName,
-            "users.name": changeOrderData.userName
+            "users.userName": changeOrderData.userName
         },
             {
                 "$set": {
@@ -146,10 +155,10 @@ app.post("/changeActiveOrders", (req, res) => {
                 }
             }
         );
-    } else {
+    } else if (changeOrderData.orderStatus === "Accept") {
         activeOrdersDb.findOneAndUpdate({
             rstName: changeOrderData.rstName,
-            "users.name": changeOrderData.userName
+            "users.userName": changeOrderData.userName
         },
             {
                 "$set": {
@@ -165,6 +174,25 @@ app.post("/changeActiveOrders", (req, res) => {
         );
     }
 
+
+})
+
+// Delete the Order After Delivery or Cancellation....
+app.post('/deleteTheOrder', (req, res) => {
+    const data = req.body; // data = {rstName: "" , userName = ""}
+    activeOrdersDb.findOneAndUpdate({ rstName: data.rstName, "users.username": data.userName },
+        {
+            $pull: {
+                users: { username: data.userName }
+            }
+        }, (err) => {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.send("Order Deleted");
+            }
+        }
+    )
 
 })
 

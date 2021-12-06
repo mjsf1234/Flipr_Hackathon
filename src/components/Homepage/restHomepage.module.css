@@ -30,7 +30,7 @@ button {
   outline: none;
 }
 
-.activeOrders {
+.itemsList {
   color: white;
   width: fit-content;
   padding: 1rem;
@@ -49,4 +49,14 @@ ul {
   background-color: white;
   color: black;
   cursor: pointer;
+}
+
+.activeOrders {
+  color: white;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.orders button {
+  margin: 0.5rem;
 }
