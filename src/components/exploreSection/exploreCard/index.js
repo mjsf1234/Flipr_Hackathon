@@ -45,8 +45,8 @@ const ExploreCard = (props) => {
             {props.showItems && <div className="card">
 
                 <div className='restaurant-info'>
-                    <p> {props.rstData[0]} </p>
-                    <p> {props.rstData[1]} </p>
+                    <p> {props.rstData.itemName} </p>
+                    <p> {props.rstData.itemPrice} </p>
                     {/* <p> {props.restaurantName}</p> */}
 
                 </div>
@@ -55,8 +55,8 @@ const ExploreCard = (props) => {
                         dispatch(cartAction.addToCart(
                             {
                                 rstName: props.restaurantName,
-                                rstItem: props.rstData[0],
-                                price: props.rstData[1]
+                                rstItem: props.rstData.itemName,
+                                price: props.rstData.itemPrice
                             }));
 
                     }}>Add to cart</button>

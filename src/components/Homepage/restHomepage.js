@@ -12,6 +12,8 @@ function RestHomepage() {
     const restName = localStorage.getItem("RstName");
 
     const [res, setRes] = useState([]);
+    const [orders, setOrders] = useState([]);
+
     useEffect(() => {
         async function getRestList() {
             const res = await axios.get('/addRest');
@@ -21,8 +23,19 @@ function RestHomepage() {
         getRestList();
     }, [])
 
+    useEffect(() => {
+        async function getOrdersList() {
+            const res = await axios.get('/orderStatus');
+            setOrders(res);
+            // console.log(res.data);
+        }
+        getOrdersList();
+    }, [])
+
     const items = res.length !== 0 ? res.data.find(rst => rst.name == restName) : [];
+    const temp_orders = orders.length !== 0 ? orders.data.find(rst => rst.rstName == restName) : [];
     console.log("Item Found is ", items);
+    console.log("Orders fetched are ", temp_orders);
 
     const addItemHandler = async (event) => {
         event.preventDefault();
@@ -56,20 +69,77 @@ function RestHomepage() {
                 </form>
             </Card>
 
-            <Card className={classes.activeOrders}>
+            <Card className={classes.itemsList}>
                 {items.length !== 0 ? items.items.map((item) => (
                     <ul>
                         <li className={classes.itemFocus} onClick={
-                            () => {
-                                console.log(item[0]);
+                            async () => {
+                                const res = await axios.post('/removeItem',
+                                    {
+                                        restName: localStorage.getItem("RstName"),
+                                        item: [item.itemName, item.itemPrice]
+                                    })
+                                console.log("Response is : ", res);
                             }
                         }>
-                            {item[0]}
+                            {item.itemName}
+                            {" - Rs." + item.itemPrice}
                         </li>
                         <hr />
                     </ul>
                 )) : null}
             </Card>
+
+
+            <Card className={classes.activeOrders}>
+                {temp_orders.length !== 0 ? temp_orders.users.map((user) => (
+                    <ul>
+                        <li className={classes.orders}>
+                            {"Username - " + user.username}
+                            {user.items.map((item) => {
+                                return <p>
+                                    {"Item Name - " + item.itemName + " "}
+                                    {"Quantity - " + item.quantity + " "}
+                                    {"Price per Item - Rs." + item.price}
+                                </p>
+                            })}
+                            <button onClick={
+                                async () => {
+                                    const res = await axios.post('/changeActiveOrders',
+                                        {
+                                            rstName: localStorage.getItem("RstName"),
+                                            userName: user.username,
+                                            orderStatus: "Accept"
+                                        })
+                                }
+                            }>Accept the order</button>
+
+                            <button onClick={
+                                async () => {
+                                    const res = await axios.post('/changeActiveOrders',
+                                        {
+                                            rstName: localStorage.getItem("RstName"),
+                                            userName: user.username,
+                                            orderStatus: "Reject"
+                                        })
+                                }
+                            }>Reject the order</button>
+
+                            <button onClick={
+                                async () => {
+                                    const res = await axios.post('/deleteTheOrder',
+                                        {
+                                            rstName: localStorage.getItem("RstName"),
+                                            userName: user.username,
+                                        })
+                                }
+                            }>Delete the Order</button>
+                        </li>
+                        <hr />
+                    </ul>
+                )) : null}
+            </Card>
+
         </div>
     )
 }
